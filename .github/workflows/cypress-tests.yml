@@ -1,6 +1,9 @@
 name: Cypress Tests
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - main
@@ -28,13 +31,13 @@ jobs:
           cd client
           npm install
           npm run build
-      
+
       - name: Build server
         run: |
           cd server
           npm install
           npm run build
-      
+
       - name: Run tests
         run: |
           npm run test-component
