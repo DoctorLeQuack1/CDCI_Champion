@@ -1,14 +1,11 @@
-# Name of workflow
-name: cypress_test
+name: Cypress Tests
 
-# Trigger workflow on all pull requests
 on:
   pull_request:
     branches:
-      - develop
       - main
+      - develop
 
-# Jobs to carry out
 jobs:
   test:
     runs-on: ubuntu-latest
