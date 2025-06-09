@@ -1,5 +1,5 @@
 # Name of workflow
-name: Cypress Tests
+name: cypress_test
 
 # Trigger workflow on all pull requests
 on:
