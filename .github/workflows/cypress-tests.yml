@@ -1,0 +1,36 @@
+name: Cypress Tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: Run Cypress tests
+        run: |
+          cd client
+          npx cypress run
+
+      - name: Upload Cypress results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-results
+          path: client/cypress/results
