@@ -29,6 +29,11 @@ jobs:
         run: |
           cd client
           npm run build
+      
+      - name: Build server
+        run: |
+          cd server
+          npm run build
 
       - name: Deploy to Render
         env:
