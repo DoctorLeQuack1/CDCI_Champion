@@ -1,12 +1,15 @@
+# Name of workflow
 name: Cypress Tests
 
+# Trigger workflow on all pull requests
 on:
   pull_request:
     branches:
       - develop
 
+# Jobs to carry out
 jobs:
-  cypress:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,16 +23,20 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm run install
+          npm install
 
-      - name: Run Cypress tests
+      - name: Build client
         run: |
           cd client
-          npx cypress run --component
-
-      - name: Upload Cypress results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: cypress-results
-          path: client/cypress/results
+          npm install
+          npm run build
+      
+      - name: Build server
+        run: |
+          cd server
+          npm install
+          npm run build
+      
+      - name: Run tests
+        run: |
+          npm run test-component
