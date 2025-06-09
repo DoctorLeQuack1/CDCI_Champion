@@ -1,13 +1,14 @@
-# Name of workflow
 name: Cypress Tests
 
-# Trigger workflow on all pull requests
 on:
-  pull_request:
+  push:
     branches:
       - develop
+  pull_request:
+    branches:
+      - main
+      - develop
 
-# Jobs to carry out
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,13 +31,13 @@ jobs:
           cd client
           npm install
           npm run build
-      
+
       - name: Build server
         run: |
           cd server
           npm install
           npm run build
-      
+
       - name: Run tests
         run: |
           npm run test-component
